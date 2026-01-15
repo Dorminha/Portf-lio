@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="py-32 lg:py-48 relative overflow-hidden">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <a href="/blog"
+            class="inline-flex items-center gap-2 text-retro-muted hover:text-retro-accent mb-8 transition-colors font-mono text-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Voltar para o Blog
+        </a>
+
+        <article
+            class="prose prose-invert prose-retro max-w-none bg-retro-card border border-white/10 rounded-xl p-8 md:p-12 shadow-2xl">
+            <header class="mb-8 border-b border-white/5 pb-8">
+                <h1 class="text-4xl font-bold text-white mb-4">{{ article.title }}</h1>
+                <time class="text-retro-muted font-mono text-sm">{{ article.published_at.strftime('%d de %B de %Y')
+                    }}</time>
+            </header>
+
+            <div class="markdown-content">
+                {{ content | safe }}
+            </div>
+        </article>
+    </div>
+</section>
+
+<style>
+    /* Reusing Prose Styles from Project Detail */
+    .prose-retro h1,
+    .prose-retro h2,
+    .prose-retro h3 {
+        color: #fffffe;
+        font-family: 'Fira Code', monospace;
+    }
+
+    .prose-retro a {
+        color: #ff8906;
+        text-decoration: none;
+    }
+
+    .prose-retro a:hover {
+        text-decoration: underline;
+    }
+
+    .prose-retro code {
+        color: #e53170;
+        background: #0f0e17;
+        padding: 0.2em 0.4em;
+        border-radius: 0.25em;
+    }
+
+    .prose-retro pre {
+        background: #0f0e17;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+</style>
+{% endblock %}

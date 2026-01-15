@@ -1,0 +1,133 @@
+:root {
+    --retro-bg: #030005;
+    /* Deep Void Purple */
+    --retro-card: rgba(10, 5, 15, 0.6);
+    --retro-text: #e0e6ed;
+    --retro-muted: #a3a3a3;
+    --retro-accent: #d8b4fe;
+    /* Soft Purple */
+    --retro-secondary: #818cf8;
+    /* Indigo */
+    --retro-purple: #c084fc;
+}
+
+.light-mode {
+    --retro-bg: #f8fafc;
+    --retro-card: rgba(255, 255, 255, 0.7);
+    --retro-text: #334155;
+    --retro-muted: #64748b;
+    --retro-accent: #6366f1;
+    --retro-secondary: #8b5cf6;
+    --retro-purple: #a855f7;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--retro-bg);
+    color: var(--retro-text);
+    transition: background-color 1s, color 0.5s;
+    overflow-x: hidden;
+    letter-spacing: -0.01em;
+}
+
+/* Classes Utilitárias Customizadas */
+.font-mono,
+h1,
+h2,
+h3 {
+    font-family: 'Fira Code', monospace;
+}
+
+.glass-panel {
+    background: var(--retro-card);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.light-mode .glass-panel {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+/* Elementos de Navegação */
+.nav-link-item {
+    @apply text-retro-muted hover:text-retro-accent transition-colors text-[10px] tracking-[0.2em] uppercase font-medium;
+}
+
+.social-icon {
+    @apply text-retro-muted hover:text-retro-accent transition-colors transform hover:scale-110;
+}
+
+.lang-toggle {
+    @apply text-retro-muted hover:text-retro-accent transition-colors ml-2 text-[10px] font-bold border border-white/10 px-2 py-1 rounded hover:border-retro-accent;
+}
+
+/* Canvas e Labels */
+#canvas-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: all;
+}
+
+#object-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: var(--retro-text);
+    padding: 4px 8px;
+    font-family: 'Fira Code', monospace;
+    font-size: 10px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+    z-index: 10;
+    border-left: 2px solid var(--retro-accent);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+    transform: translate(-50%, -150%);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--retro-accent);
+}
+
+.light-mode ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* Animações */
+.fade-in-up {
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}

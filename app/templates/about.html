@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="py-20 relative overflow-hidden">
+    <!-- Background Elements -->
+    <div class="absolute top-0 right-0 w-1/2 h-full bg-retro-purple/5 -skew-x-12 pointer-events-none"></div>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="flex flex-col md:flex-row gap-12 items-center">
+
+            <!-- SEÇÃO DA FOTO -->
+            <div class="w-full md:w-1/2">
+                <div class="relative group">
+                    <div
+                        class="absolute -inset-1 bg-gradient-to-r from-retro-purple to-retro-accent rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200">
+                    </div>
+                    <div class="relative bg-retro-card ring-1 ring-white/10 rounded-lg overflow-hidden aspect-[4/5]">
+                        <img src="{{ github_avatar }}" alt="Foto de Perfil"
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                            onerror="this.src='https://ui-avatars.com/api/?name=User&background=0D8ABC&color=fff';">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Section -->
+            <div class="w-full md:w-1/2 space-y-6">
+                <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
+                    Olá, eu sou <span class="text-retro-purple">Luan de Paz</span>.
+                </h1>
+                <h2 class="text-xl text-retro-accent font-mono">Full Stack Engineer & RPA Developer</h2>
+
+                <div class="prose prose-invert text-retro-muted">
+                    <p>
+                        Sou apaixonado por transformar ideias complexas em soluções elegantes e eficientes.
+                        Com background em infraestrutura e desenvolvimento, tenho uma visão holística de como
+                        construir sistemas robustos e escaláveis.
+                    </p>
+                    <p>
+                        Atualmente, foco em <strong>Python (FastAPI, Django)</strong>, <strong>React</strong> e
+                        automação de processos (RPA). Adoro desafios que envolvem otimização de performance
+                        e arquitetura de software.
+                    </p>
+                </div>
+
+                <!-- Skills Grid -->
+                <div class="grid grid-cols-2 gap-4 pt-6">
+                    <div class="bg-retro-bg/50 p-4 rounded border border-white/5">
+                        <h3 class="text-white font-bold mb-2">Backend</h3>
+                        <ul class="text-sm text-retro-muted space-y-1">
+                            <li>• Python (FastAPI, Django)</li>
+                            <li>• Node.js</li>
+                            <li>• PostgreSQL / Redis</li>
+                        </ul>
+                    </div>
+                    <div class="bg-retro-bg/50 p-4 rounded border border-white/5">
+                        <h3 class="text-white font-bold mb-2">Frontend</h3>
+                        <ul class="text-sm text-retro-muted space-y-1">
+                            <li>• React / Next.js</li>
+                            <li>• Tailwind CSS</li>
+                            <li>• HTMX</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Coding Stats (GITHUB INTELLIGENCE) -->
+                <div class="pt-6">
+                    <h3 class="text-white font-bold mb-4 font-mono text-sm tracking-wider">GITHUB INTELLIGENCE</h3>
+
+                    <div class="flex flex-wrap gap-4">
+
+                        <!-- Card: Linguagens Mais Usadas (Mantido pois tem tratamento de erro) -->
+                        <div
+                            class="relative w-full max-w-[340px] bg-retro-bg/30 rounded-lg border border-white/10 overflow-hidden hover:border-retro-accent/30 transition-all group">
+                            <!-- Loading State -->
+                            <div class="absolute inset-0 bg-retro-card animate-pulse -z-10"></div>
+
+                            <img src="https://github-readme-stats.vercel.app/api/top-langs/?username={{ github_username }}&layout=compact&theme=tokyonight&bg_color=00000000&hide_border=true&title_color=d8b4fe&text_color=a3a3a3&icon_color=818cf8"
+                                alt="Top Languages" class="w-full h-auto object-contain min-h-[100px]" loading="lazy"
+                                onerror="this.style.display='none'; document.getElementById('stats-error').classList.remove('hidden');">
+
+                            <!-- Fallback em caso de Erro 503 (API Limit) -->
+                            <div id="stats-error" class="hidden p-4 text-center">
+                                <p class="text-xs text-retro-muted mb-2">Status: Offline (API Limit)</p>
+                                <a href="https://github.com/{{ github_username }}" target="_blank"
+                                    class="text-retro-accent text-xs hover:underline">
+                                    Ver perfil no GitHub ↗
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- O CARD "GITHUB STATS" QUE ESTAVA QUEBRADO FOI REMOVIDO DAQUI -->
+
+                    </div>
+                </div>
+
+                <div class="pt-8">
+                    <a href="#contact"
+                        class="inline-block bg-retro-purple hover:bg-retro-purple/80 text-white px-8 py-3 rounded-lg font-bold transition-all transform hover:scale-105 shadow-lg shadow-retro-purple/20">
+                        Vamos conversar?
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,47 @@
+{
+  "online": true,
+  "username": "Dorman",
+  "avatar_url": "https://avatars.steamstatic.com/a8c5d92192f114f5ed05a03a86e53facc7d22a27_full.jpg",
+  "profile_url": "https://steamcommunity.com/profiles/76561198041208121/",
+  "level": 47,
+  "status": 0,
+  "recent_games": [
+    {
+      "name": "ARC Raiders",
+      "appid": 1808500,
+      "playtime_2weeks": 72.0,
+      "playtime_total": 197.8,
+      "icon_url": "http://media.steampowered.com/steamcommunity/public/images/apps/1808500/c284e73b6f3321864805d66f99924a0da9f0b219.jpg",
+      "achievements": {
+        "total": 50,
+        "achieved": 43,
+        "percentage": 86
+      }
+    },
+    {
+      "name": "ELDEN RING",
+      "appid": 1245620,
+      "playtime_2weeks": 6.2,
+      "playtime_total": 12.6,
+      "icon_url": "http://media.steampowered.com/steamcommunity/public/images/apps/1245620/b6e290dd5a92ce98f89089a207733c70c41a1871.jpg",
+      "achievements": {
+        "total": 42,
+        "achieved": 2,
+        "percentage": 4
+      }
+    },
+    {
+      "name": "ULTRAKILL",
+      "appid": 1229490,
+      "playtime_2weeks": 0.1,
+      "playtime_total": 0.4,
+      "icon_url": "http://media.steampowered.com/steamcommunity/public/images/apps/1229490/665f952065f0512a2079efd77308e6a5af23dfd6.jpg",
+      "achievements": {
+        "total": 0,
+        "achieved": 0,
+        "percentage": 0
+      }
+    }
+  ],
+  "screenshots": []
+}

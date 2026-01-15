@@ -1,0 +1,13 @@
+<!-- A Bolha da IA (Visual Original mantido) -->
+<div class="flex justify-start animate-fade-in-up mb-4">
+    <div class="bg-white/10 text-retro-text text-sm p-3 rounded-2xl rounded-tl-none max-w-[85%] border border-white/5">
+        <!-- O filtro | safe permite renderizar Markdown/HTML que o Gemini gerar -->
+        {{ message.message | safe }}
+    </div>
+</div>
+
+<!-- Script de Scroll (Para garantir que role quando a IA terminar de falar) -->
+<script>
+    var chatDiv = document.getElementById("messages-area");
+    if (chatDiv) chatDiv.scrollTop = chatDiv.scrollHeight;
+</script>

@@ -1,0 +1,39 @@
+{% for project in projects %}
+<div class="glass-panel rounded-xl p-6 hover:border-retro-purple/50 transition-all hover:-translate-y-1 flex flex-col h-full group relative reveal"
+    data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
+    <div class="flex justify-between items-start mb-4">
+        <h3 class="text-lg font-bold text-white group-hover:text-retro-purple transition-colors">{{ project.name }}</h3>
+        <span class="bg-retro-bg border border-white/10 text-retro-accent text-xs font-mono px-2 py-1 rounded">
+            {{ project.stars }} ★
+        </span>
+    </div>
+    <p class="text-retro-muted mb-6 flex-grow text-sm leading-relaxed">
+        {{ project.description or "Sem descrição disponível." }}
+    </p>
+    <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
+        <span class="text-xs text-retro-secondary font-mono">{{ project.language or "Code" }}</span>
+        <a href="{{ project.url }}" target="_blank"
+            class="text-white hover:text-retro-accent text-sm font-semibold flex items-center gap-1 transition-colors">
+            Ver Código
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+        </a>
+    </div>
+</div>
+{% endfor %}
+
+{% if next_page %}
+<div id="load-more-container" class="col-span-1 md:col-span-2 lg:col-span-3 flex justify-center mt-8">
+    <button hx-get="/projects/more?page={{ next_page }}" hx-trigger="click" hx-target="#load-more-container"
+        hx-swap="outerHTML"
+        class="glass-panel border border-white/10 text-white px-6 py-3 rounded-lg font-mono text-sm hover:bg-white/5 transition-colors flex items-center gap-2">
+        <span>[ CARREGAR MAIS ]</span>
+        <img class="htmx-indicator h-5 w-5"
+            src="https://raw.githubusercontent.com/n3r4zzurr0/svg-spinners/main/svg-css/90-ring-with-bg.svg"
+            alt="Loading...">
+    </button>
+</div>
+{% endif %}

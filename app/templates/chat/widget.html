@@ -1,0 +1,18 @@
+<div class="fixed bottom-6 right-6 z-50 animate-bounce-slow">
+    <button hx-get="/chat/window" hx-target="this" hx-swap="outerHTML"
+        class="w-14 h-14 rounded-full bg-retro-accent/20 backdrop-blur-md border border-retro-accent text-retro-accent shadow-[0_0_15px_rgba(139,92,246,0.3)] hover:scale-110 hover:bg-retro-accent hover:text-black transition-all duration-300 flex items-center justify-center group">
+        <!-- Icon: Chat Bubble -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 group-hover:animate-pulse" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+        </svg>
+
+        <!-- Ping Effect -->
+        <span class="absolute top-0 right-0 -mt-1 -mr-1 flex h-3 w-3">
+            <span
+                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-retro-secondary opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3 bg-retro-secondary"></span>
+        </span>
+    </button>
+</div>

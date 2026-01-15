@@ -1,0 +1,197 @@
+<!-- Game Servers Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+    <!-- Minecraft Server -->
+    <div
+        class="glass-panel p-6 rounded-xl border border-white/10 hover:border-green-500/50 transition-all group relative overflow-hidden">
+        <div class="absolute top-0 right-0 p-4 opacity-50 group-hover:opacity-100 transition-opacity">
+            <span class="text-xs font-mono border border-white/10 px-2 py-1 rounded text-retro-muted">MINECRAFT</span>
+        </div>
+
+        <div class="flex items-center gap-4 mb-4">
+            <div
+                class="w-12 h-12 rounded-lg flex items-center justify-center bg-green-500/20 group-hover:scale-110 transition-transform duration-500 overflow-hidden">
+                <!-- Minecraft Icon -->
+                <img src="/static/images/minecraft.png"
+                    onerror="this.src='https://placehold.co/100x100/22c55e/ffffff?text=MC'" alt="Minecraft Server"
+                    class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+            </div>
+            <div>
+                <h3 class="text-white font-bold text-lg">{{ minecraft.motd or "Minecraft Server" }}</h3>
+                <div class="flex items-center gap-2">
+                    {% if minecraft.online %}
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                    <span class="text-green-400 text-xs font-mono">ONLINE</span>
+                    {% else %}
+                    <span class="w-2 h-2 rounded-full bg-red-500"></span>
+                    <span class="text-red-400 text-xs font-mono">OFFLINE</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        {% if minecraft.online %}
+        <div class="grid grid-cols-2 gap-4 mt-4">
+            <div class="bg-white/5 p-3 rounded-lg">
+                <span class="block text-retro-muted text-xs font-mono mb-1">PLAYERS</span>
+                <span class="text-white font-bold text-xl">{{ minecraft.players }}<span
+                        class="text-retro-muted text-sm">/{{ minecraft.max_players }}</span></span>
+            </div>
+            <div class="bg-white/5 p-3 rounded-lg">
+                <span class="block text-retro-muted text-xs font-mono mb-1">LATENCY</span>
+                <span class="text-white font-bold text-xl">{{ minecraft.latency }}<span
+                        class="text-retro-muted text-sm">ms</span></span>
+            </div>
+        </div>
+        <div class="mt-4 text-xs text-retro-muted font-mono">
+            Ver: {{ minecraft.version }}
+        </div>
+        {% else %}
+        <div class="mt-4 p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-sm">
+            {{ minecraft.error or "Servidor indisponível no momento." }}
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Project Zomboid Server -->
+    <div
+        class="glass-panel p-6 rounded-xl border border-white/10 hover:border-red-500/50 transition-all group relative overflow-hidden">
+        <div class="absolute top-0 right-0 p-4 opacity-50 group-hover:opacity-100 transition-opacity">
+            <span class="text-xs font-mono border border-white/10 px-2 py-1 rounded text-retro-muted">ZOMBOID</span>
+        </div>
+
+        <div class="flex items-center gap-4 mb-4">
+            <div
+                class="w-12 h-12 rounded-lg flex items-center justify-center bg-red-500/20 group-hover:scale-110 transition-transform duration-500 overflow-hidden">
+                <!-- Zomboid Icon -->
+                <img src="/static/images/zomboid.png"
+                    onerror="this.src='https://placehold.co/100x100/ef4444/ffffff?text=PZ'" alt="Zomboid Server"
+                    class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+            </div>
+            <div>
+                <h3 class="text-white font-bold text-lg">{{ zomboid.server_name or "Project Zomboid Server" }}</h3>
+                <div class="flex items-center gap-2">
+                    {% if zomboid.online %}
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                    <span class="text-green-400 text-xs font-mono">ONLINE</span>
+                    {% else %}
+                    <span class="w-2 h-2 rounded-full bg-red-500"></span>
+                    <span class="text-red-400 text-xs font-mono">OFFLINE</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        {% if zomboid.online %}
+        <div class="grid grid-cols-2 gap-4 mt-4">
+            <div class="bg-white/5 p-3 rounded-lg">
+                <span class="block text-retro-muted text-xs font-mono mb-1">SURVIVORS</span>
+                <span class="text-white font-bold text-xl">{{ zomboid.players }}<span
+                        class="text-retro-muted text-sm">/{{ zomboid.max_players }}</span></span>
+            </div>
+            <div class="bg-white/5 p-3 rounded-lg">
+                <span class="block text-retro-muted text-xs font-mono mb-1">LATENCY</span>
+                <span class="text-white font-bold text-xl">{{ zomboid.latency }}<span
+                        class="text-retro-muted text-sm">ms</span></span>
+            </div>
+        </div>
+        <div class="mt-4 text-xs text-retro-muted font-mono">
+            Map: {{ zomboid.map }}
+        </div>
+        {% else %}
+        <div class="mt-4 p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-sm">
+            {{ zomboid.error or "Servidor indisponível no momento." }}
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Discord Community Section -->
+<div class="w-full">
+    <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+        <span class="text-indigo-500">#</span> Community
+    </h3>
+
+    <div
+        class="glass-panel p-6 rounded-xl border border-white/10 hover:border-indigo-500/50 transition-all group relative overflow-hidden">
+        <div class="absolute top-0 right-0 p-4 opacity-50 group-hover:opacity-100 transition-opacity">
+            <span class="text-xs font-mono border border-white/10 px-2 py-1 rounded text-retro-muted">DISCORD</span>
+        </div>
+
+        <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
+            <div class="flex items-center gap-4">
+                <div
+                    class="w-16 h-16 rounded-xl flex items-center justify-center bg-indigo-500/20 group-hover:scale-110 transition-transform duration-500 overflow-hidden">
+                    <!-- Discord Icon -->
+                    {% if discord.icon_url %}
+                    <img src="{{ discord.icon_url }}" alt="Discord Server"
+                        class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                    {% else %}
+                    <img src="/static/images/discord.png"
+                        onerror="this.src='https://placehold.co/100x100/6366f1/ffffff?text=DC'" alt="Discord Server"
+                        class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                    {% endif %}
+                </div>
+                <div>
+                    <h3 class="text-white font-bold text-xl">{{ discord.name or "Discord Community" }}</h3>
+                    <div class="flex items-center gap-2">
+                        {% if discord.online %}
+                        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                        <span class="text-green-400 text-xs font-mono">ONLINE</span>
+                        {% else %}
+                        <span class="w-2 h-2 rounded-full bg-red-500"></span>
+                        <span class="text-red-400 text-xs font-mono">OFFLINE</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            {% if discord.online %}
+            <div class="flex-1 w-full md:w-auto grid grid-cols-2 md:grid-cols-3 gap-4">
+                <div class="bg-white/5 p-3 rounded-lg">
+                    <span class="block text-retro-muted text-xs font-mono mb-1">MEMBERS ONLINE</span>
+                    <span class="text-white font-bold text-xl">{{ discord.presence_count }}</span>
+                </div>
+
+                <!-- Online Members Avatars -->
+                {% if discord.members %}
+                <div class="bg-white/5 p-3 rounded-lg col-span-2 md:col-span-1">
+                    <span class="block text-retro-muted text-xs font-mono mb-2">ACTIVE NOW</span>
+                    <div class="flex -space-x-2 overflow-hidden py-1">
+                        {% for member in discord.members[:5] %}
+                        <img class="inline-block h-8 w-8 rounded-full ring-2 ring-black bg-white/10"
+                            src="{{ member.avatar_url }}" alt="{{ member.username }}" title="{{ member.username }}">
+                        {% endfor %}
+                        {% if discord.members|length > 5 %}
+                        <div
+                            class="flex items-center justify-center h-8 w-8 rounded-full ring-2 ring-black bg-white/10 text-xs text-retro-muted font-mono">
+                            +{{ discord.members|length - 5 }}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="bg-white/5 p-3 rounded-lg flex items-center justify-center col-span-2 md:col-span-1">
+                    {% if discord.instant_invite %}
+                    <a href="{{ discord.instant_invite }}" target="_blank"
+                        class="px-6 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-bold rounded transition-colors w-full text-center flex items-center justify-center gap-2">
+                        <span>JOIN SERVER</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </a>
+                    {% else %}
+                    <span class="text-retro-muted text-xs">No Invite Available</span>
+                    {% endif %}
+                </div>
+            </div>
+            {% else %}
+            <div class="flex-1 p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-sm">
+                {{ discord.error or "Widget disabled or ID invalid." }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

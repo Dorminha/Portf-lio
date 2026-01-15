@@ -1,0 +1,29 @@
+<!-- 1. A Bolha do Usuário (Visual Original mantido) -->
+<div class="flex justify-end animate-fade-in-up mb-4">
+    <div class="bg-retro-purple text-white text-sm p-3 rounded-2xl rounded-tr-none max-w-[85%] border border-white/5">
+        {{ message.message }}
+    </div>
+</div>
+
+<!-- 2. O Gatilho da IA (A Mágica do HTMX) -->
+<!-- 
+    hx-get: Assim que este HTML carregar, chama a rota da IA.
+    hx-trigger: "load" dispara imediatamente.
+    hx-swap: "outerHTML" substitui ESTE div inteiro pela resposta da IA quando ela chegar.
+-->
+<div hx-get="/chat/get-ai-response" hx-trigger="load" hx-swap="outerHTML" class="flex justify-start animate-pulse mb-4">
+
+    <!-- 3. Indicador de "Digitando..." (Visual Provisório) -->
+    <div
+        class="bg-white/5 text-retro-text text-xs p-3 rounded-2xl rounded-tl-none border border-white/5 flex items-center gap-2">
+        <span class="w-1.5 h-1.5 bg-retro-text rounded-full animate-bounce"></span>
+        <span class="w-1.5 h-1.5 bg-retro-text rounded-full animate-bounce delay-75"></span>
+        <span class="w-1.5 h-1.5 bg-retro-text rounded-full animate-bounce delay-150"></span>
+    </div>
+</div>
+
+<!-- Script de Scroll -->
+<script>
+    var chatDiv = document.getElementById("messages-area");
+    if (chatDiv) chatDiv.scrollTop = chatDiv.scrollHeight;
+</script>

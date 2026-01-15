@@ -1,0 +1,681 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Bibliotecas para o Readme -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.8/purify.min.js"></script>
+
+<style>
+    /* Grid Retro Background */
+    .retro-grid-bg {
+        background-size: 40px 40px;
+        background-image:
+            linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+        mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+        -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+    }
+
+    /* Markdown Styles */
+    .markdown-body {
+        color: var(--retro-text);
+        font-family: 'Inter', sans-serif;
+        line-height: 1.6;
+        font-size: 0.95rem;
+    }
+
+    .markdown-body h1,
+    .markdown-body h2,
+    .markdown-body h3 {
+        color: var(--retro-accent);
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+        font-weight: 700;
+    }
+
+    .markdown-body h1 {
+        font-size: 1.8em;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 0.3em;
+    }
+
+    .markdown-body a {
+        color: var(--retro-secondary);
+        text-decoration: none;
+        border-bottom: 1px dashed var(--retro-secondary);
+    }
+
+    .markdown-body code {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 2px 5px;
+        border-radius: 4px;
+        font-family: 'Fira Code', monospace;
+        font-size: 0.85em;
+    }
+
+    .markdown-body pre {
+        background: #111 !important;
+        padding: 1em;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 1em 0;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .markdown-body img {
+        max-width: 100%;
+        border-radius: 8px;
+        margin: 10px 0;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .markdown-body blockquote {
+        border-left: 4px solid var(--retro-secondary);
+        padding-left: 1em;
+        margin: 1em 0;
+        color: var(--retro-muted);
+        font-style: italic;
+    }
+</style>
+
+<!-- 1. HERO SECTION -->
+<section class="relative min-h-[85vh] flex flex-col items-center justify-center overflow-hidden w-full">
+    <div class="absolute inset-0 retro-grid-bg -z-10 pointer-events-none"></div>
+    <div
+        class="absolute top-20 left-1/4 w-[500px] h-[500px] bg-retro-purple/5 rounded-full blur-[100px] pointer-events-none">
+    </div>
+    <div
+        class="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-retro-accent/5 rounded-full blur-[80px] pointer-events-none">
+    </div>
+
+    <div class="relative z-10 text-center px-4">
+        <div class="mb-8 relative inline-block group">
+            <div
+                class="absolute -inset-1 bg-gradient-to-r from-retro-accent to-retro-secondary rounded-full blur opacity-20 group-hover:opacity-40 transition duration-1000 animate-pulse">
+            </div>
+            <img src="https://github.com/Dorminha.png" alt="Luan"
+                class="relative w-24 h-24 rounded-full border-2 border-white/10 shadow-2xl grayscale group-hover:grayscale-0 transition-all duration-500">
+        </div>
+
+        <h1
+            class="text-6xl md:text-8xl font-black tracking-tighter mb-4 text-transparent bg-clip-text bg-gradient-to-r from-retro-accent via-white to-retro-secondary animate-pulse-slow">
+            Luan de <span class="text-retro-purple">Paz</span>
+        </h1>
+
+        <p class="text-xl md:text-2xl text-retro-muted max-w-2xl mx-auto font-light mb-8">
+            <span class="text-retro-accent font-mono">&lt;Infra&gt;</span> evoluída para
+            <span class="text-retro-accent font-mono">&lt;Code/&gt;</span>
+        </p>
+
+        <div class="flex flex-wrap gap-4 justify-center">
+            <a href="#projects"
+                class="px-8 py-3 bg-retro-accent/10 border border-retro-accent text-retro-accent hover:bg-retro-accent hover:text-black transition-all duration-300 rounded font-mono text-sm tracking-widest uppercase">
+                Ver Projetos
+            </a>
+            <a href="https://github.com/Dorminha" target="_blank"
+                class="px-8 py-3 border border-white/10 text-retro-muted hover:border-white hover:text-white transition-all duration-300 rounded font-mono text-sm tracking-widest uppercase">
+                GitHub
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<!-- 2. HISTÓRICO PROFISSIONAL (Estilo Cards Unificado) -->
+<section class="py-24 relative">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        <!-- Header -->
+        <h2 class="text-4xl font-bold text-white mb-12 flex items-center gap-4">
+            <span class="text-retro-purple text-5xl">/</span>
+            <div>
+                <span class="block text-sm font-mono text-retro-accent tracking-widest mb-1">CAREER.LOG</span>
+                Histórico Profissional
+            </div>
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <!-- Card 1 -->
+            <div
+                class="glass-panel p-8 rounded-2xl hover:border-retro-accent/50 transition-all duration-300 hover:-translate-y-2 group">
+                <div class="flex justify-between items-start mb-6">
+                    <div
+                        class="w-12 h-12 bg-retro-purple/20 rounded-lg flex items-center justify-center group-hover:bg-retro-purple/30 transition-colors">
+                        <!-- Icon: Academic/Mentor -->
+                        <svg class="w-6 h-6 text-retro-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z">
+                            </path>
+                        </svg>
+                    </div>
+                    <span
+                        class="font-mono text-xs border border-retro-purple/30 text-retro-purple px-2 py-1 rounded">2025
+                        (Prev)</span>
+                </div>
+                <h3 class="text-white font-bold text-xl mb-2 group-hover:text-retro-purple transition-colors">Tutor
+                    Python & Mentor</h3>
+                <p class="text-retro-muted text-sm leading-relaxed mb-4">
+                    Mentoria de talentos em larga escala (50+ alunos). Arquitetura de currículo técnico, Clean Code e
+                    POO.
+                </p>
+                <div class="flex gap-2 flex-wrap">
+                    <span class="text-[10px] bg-white/5 px-2 py-1 rounded text-retro-muted">Python</span>
+                    <span class="text-[10px] bg-white/5 px-2 py-1 rounded text-retro-muted">Education</span>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div
+                class="glass-panel p-8 rounded-2xl hover:border-retro-accent/50 transition-all duration-300 hover:-translate-y-2 group">
+                <div class="flex justify-between items-start mb-6">
+                    <div
+                        class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center group-hover:bg-green-500/30 transition-colors">
+                        <!-- Icon: Award/Admin -->
+                        <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z">
+                            </path>
+                        </svg>
+                    </div>
+                    <span class="font-mono text-xs border border-green-500/30 text-green-400 px-2 py-1 rounded">2024 -
+                        2025</span>
+                </div>
+                <h3 class="text-white font-bold text-xl mb-2 group-hover:text-green-400 transition-colors">Suporte TI &
+                    Encarregado</h3>
+                <p class="text-retro-muted text-sm leading-relaxed mb-4">
+                    <strong class="text-white">🏆 Destaque 2024.</strong> Redução de 30% em custos (FinOps). Automação
+                    RPA com Selenium/Pandas.
+                </p>
+                <div class="flex gap-2 flex-wrap">
+                    <span class="text-[10px] bg-white/5 px-2 py-1 rounded text-retro-muted">FinOps</span>
+                    <span class="text-[10px] bg-white/5 px-2 py-1 rounded text-retro-muted">RPA</span>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div
+                class="glass-panel p-8 rounded-2xl hover:border-retro-accent/50 transition-all duration-300 hover:-translate-y-2 group">
+                <div class="flex justify-between items-start mb-6">
+                    <div
+                        class="w-12 h-12 bg-retro-accent/20 rounded-lg flex items-center justify-center group-hover:bg-retro-accent/30 transition-colors">
+                        <!-- Icon: Public Sector/Support -->
+                        <svg class="w-6 h-6 text-retro-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                            </path>
+                        </svg>
+                    </div>
+                    <span class="font-mono text-xs border border-white/10 text-retro-muted px-2 py-1 rounded">2022 -
+                        2024</span>
+                </div>
+                <h3 class="text-white font-bold text-xl mb-2 group-hover:text-retro-accent transition-colors">Estágios &
+                    Suporte Público</h3>
+                <p class="text-retro-muted text-sm leading-relaxed mb-4">
+                    Otimização de processos com Google AppScript e Excel. Implementação do E-SUS.
+                </p>
+                <div class="flex gap-2 flex-wrap">
+                    <span class="text-[10px] bg-white/5 px-2 py-1 rounded text-retro-muted">Google Script</span>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div
+                class="glass-panel p-8 rounded-2xl hover:border-retro-accent/50 transition-all duration-300 hover:-translate-y-2 group">
+                <div class="flex justify-between items-start mb-6">
+                    <div
+                        class="w-12 h-12 bg-retro-accent/20 rounded-lg flex items-center justify-center group-hover:bg-retro-accent/30 transition-colors">
+                        <!-- Icon: Server/Infra -->
+                        <svg class="w-6 h-6 text-retro-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01">
+                            </path>
+                        </svg>
+                    </div>
+                    <span class="font-mono text-xs border border-white/10 text-retro-muted px-2 py-1 rounded">2020 -
+                        2022</span>
+                </div>
+                <h3 class="text-white font-bold text-xl mb-2 group-hover:text-retro-accent transition-colors">
+                    Infraestrutura Core</h3>
+                <p class="text-retro-muted text-sm leading-relaxed mb-4">
+                    Linux, Windows Server, AD, Zabbix/Grafana e Redes.
+                </p>
+                <div class="flex gap-2 flex-wrap">
+                    <span class="text-[10px] bg-white/5 px-2 py-1 rounded text-retro-muted">Linux</span>
+                    <span class="text-[10px] bg-white/5 px-2 py-1 rounded text-retro-muted">AD</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- 3. COMPETÊNCIAS TÉCNICAS (Já estava ok, mantido igual) -->
+<section id="skills" class="py-24 relative overflow-hidden bg-white/5">
+    <div
+        class="absolute top-0 right-0 w-96 h-96 bg-retro-purple/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none">
+    </div>
+    <div
+        class="absolute bottom-0 left-0 w-96 h-96 bg-retro-accent/5 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2 pointer-events-none">
+    </div>
+
+    <div class="max-w-6xl mx-auto px-4 relative z-10">
+        <h2 class="text-4xl font-bold text-white mb-12 flex items-center gap-4">
+            <span class="text-retro-purple text-5xl">/</span>
+            <div>
+                <span class="block text-sm font-mono text-retro-accent tracking-widest mb-1">SYSTEM.SPECS</span>
+                Competências Técnicas
+            </div>
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Card 1 -->
+            <div
+                class="glass-panel p-8 rounded-2xl hover:border-retro-accent/50 transition-all duration-300 hover:-translate-y-2 group">
+                <div
+                    class="w-12 h-12 bg-retro-accent/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-retro-accent/30 transition-colors">
+                    <svg class="w-6 h-6 text-retro-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                        </path>
+                    </svg>
+                </div>
+                <h3 class="text-white font-bold text-xl mb-4 group-hover:text-retro-accent transition-colors">Infra &
+                    Cloud</h3>
+                <ul class="space-y-3 text-retro-muted text-sm">
+                    <li class="flex items-center gap-2"><span
+                            class="w-1.5 h-1.5 bg-retro-accent rounded-full"></span>Windows Server / Linux</li>
+                    <li class="flex items-center gap-2"><span
+                            class="w-1.5 h-1.5 bg-retro-accent rounded-full"></span>Active Directory / GPO</li>
+                    <li class="flex items-center gap-2"><span
+                            class="w-1.5 h-1.5 bg-retro-accent rounded-full"></span>Cloud (AWS/Google)</li>
+                </ul>
+            </div>
+            <!-- Card 2 -->
+            <div
+                class="glass-panel p-8 rounded-2xl hover:border-retro-accent/50 transition-all duration-300 hover:-translate-y-2 group">
+                <div
+                    class="w-12 h-12 bg-retro-purple/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-retro-purple/30 transition-colors">
+                    <svg class="w-6 h-6 text-retro-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                    </svg>
+                </div>
+                <h3 class="text-white font-bold text-xl mb-4 group-hover:text-retro-purple transition-colors">Dev &
+                    Automação</h3>
+                <ul class="space-y-3 text-retro-muted text-sm">
+                    <li class="flex items-center gap-2"><span
+                            class="w-1.5 h-1.5 bg-retro-purple rounded-full"></span>Python (FastAPI, Selenium)</li>
+                    <li class="flex items-center gap-2"><span
+                            class="w-1.5 h-1.5 bg-retro-purple rounded-full"></span>RPA & Bots</li>
+                    <li class="flex items-center gap-2"><span
+                            class="w-1.5 h-1.5 bg-retro-purple rounded-full"></span>SQL & NoSQL</li>
+                </ul>
+            </div>
+            <!-- Card 3 -->
+            <div
+                class="glass-panel p-8 rounded-2xl hover:border-retro-accent/50 transition-all duration-300 hover:-translate-y-2 group">
+                <div
+                    class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-green-500/30 transition-colors">
+                    <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-white font-bold text-xl mb-4 group-hover:text-green-400 transition-colors">Governança
+                </h3>
+                <ul class="space-y-3 text-retro-muted text-sm">
+                    <li class="flex items-center gap-2"><span
+                            class="w-1.5 h-1.5 bg-green-400 rounded-full"></span>FinOps & Custos</li>
+                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-green-400 rounded-full"></span>LGPD
+                        & Compliance</li>
+                    <li class="flex items-center gap-2"><span
+                            class="w-1.5 h-1.5 bg-green-400 rounded-full"></span>Liderança Técnica</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 4. PROJECTS SECTION (Moved Here) -->
+<section id="projects" class="py-24 relative">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+            <div>
+                <h2 class="text-4xl font-bold text-white mb-2 flex items-center gap-3">
+                    <span class="text-retro-purple">./</span> Projetos
+                </h2>
+                <p class="text-retro-muted font-mono text-sm">Clique nos cards para ver o Readme.</p>
+            </div>
+            <button hx-get="/projects/sync" hx-swap="none"
+                class="glass-panel px-4 py-2 rounded-lg text-retro-accent hover:text-white transition-all hover:bg-retro-accent/10 text-sm font-mono flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                    </path>
+                </svg>
+                Sync Repos
+            </button>
+        </div>
+
+        <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% if projects %}
+            {% for project in projects %}
+            <div class="glass-panel p-6 rounded-xl hover:border-retro-accent/50 transition-all group cursor-pointer relative overflow-hidden hover:-translate-y-1"
+                onclick="openReadme('Dorminha', '{{ project.name }}')">
+                <div class="absolute top-0 right-0 p-4 opacity-50 group-hover:opacity-100 transition-opacity">
+                    <svg class="w-6 h-6 text-retro-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                    </svg>
+                </div>
+                <h4 class="text-xl font-bold mb-2 mt-2 group-hover:text-retro-accent transition-colors">{{ project.name
+                    }}</h4>
+                <p class="text-retro-muted text-sm line-clamp-3 mb-4 h-16">{{ project.description if project.description
+                    else "Sem descrição." }}</p>
+                <div class="flex gap-2 mt-auto">
+                    {% if project.language %}
+                    <span
+                        class="text-[10px] bg-white/5 px-2 py-1 rounded text-retro-muted border border-white/5 font-mono uppercase">{{
+                        project.language }}</span>
+                    {% endif %}
+                    <span
+                        class="text-[10px] bg-retro-purple/10 px-2 py-1 rounded text-retro-purple border border-retro-purple/20 font-mono flex items-center gap-1">★
+                        {{ project.stars }}</span>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="col-span-full text-center py-12 glass-panel rounded-xl border-dashed border-2 border-white/10">
+                <p class="text-retro-muted font-mono mb-4">Nenhum repositório sincronizado ainda.</p>
+                <button hx-get="/projects/sync" hx-target="#projects-grid"
+                    class="px-6 py-2 bg-retro-accent text-retro-bg font-bold rounded hover:bg-white transition-colors">Sincronizar
+                    Agora</button>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- 3.5. GAME SERVERS -->
+<section id="servers" class="py-24 relative">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <h2 class="text-4xl font-bold text-white mb-12 flex items-center gap-4">
+            <span class="text-retro-purple text-5xl">#</span>
+            <div>
+                <span class="block text-sm font-mono text-retro-accent tracking-widest mb-1">SERVER.STATUS</span>
+                Servidores de Jogos
+            </div>
+        </h2>
+
+        <div hx-get="/api/servers" hx-trigger="load" hx-swap="innerHTML">
+            <!-- Loading State -->
+            <div
+                class="glass-panel p-12 rounded-xl border border-white/10 flex flex-col items-center justify-center gap-4">
+                <div class="w-12 h-12 border-2 border-retro-accent border-t-transparent rounded-full animate-spin">
+                </div>
+                <p class="font-mono text-retro-muted animate-pulse">PINGING SERVERS...</p>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+<!-- 3.6. STEAM PROFILE -->
+<section id="steam" class="py-12 relative">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div hx-get="/api/steam" hx-trigger="load" hx-swap="innerHTML">
+            <!-- Loading State -->
+            <div
+                class="glass-panel p-12 rounded-xl border border-white/10 flex flex-col items-center justify-center gap-4">
+                <div class="w-12 h-12 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                <p class="font-mono text-retro-muted animate-pulse">LOADING PROFILE...</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 5. CONTACT SECTION (Estilo Unificado) -->
+<section id="contact" class="py-24 relative overflow-hidden">
+    <div class="max-w-4xl mx-auto px-4 relative z-10">
+
+        <!-- Header -->
+        <h2 class="text-4xl font-bold text-white mb-12 flex items-center gap-4">
+            <span class="text-retro-purple text-5xl">@</span>
+            <div>
+                <span class="block text-sm font-mono text-retro-accent tracking-widest mb-1">COMM.LINK</span>
+                Contato Profissional
+            </div>
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+            <!-- Contact Info Panel -->
+            <div class="md:col-span-1 space-y-6">
+                <div class="glass-panel p-6 rounded-2xl hover:border-retro-accent/50 transition-all duration-300">
+                    <h3 class="text-white font-bold mb-4 font-mono">CANAIS</h3>
+                    <div class="space-y-4">
+                        <a href="mailto:luandepaz017@gmail.com"
+                            class="flex items-center gap-3 text-retro-muted hover:text-retro-accent transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                            <span class="text-xs tracking-wider">EMAIL</span>
+                        </a>
+                        <a href="https://linkedin.com/in/luan-de-paz" target="_blank"
+                            class="flex items-center gap-3 text-retro-muted hover:text-retro-accent transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z">
+                                </path>
+                            </svg>
+                            <span class="text-xs tracking-wider">LINKEDIN</span>
+                        </a>
+                        <a href="https://github.com/Dorminha" target="_blank"
+                            class="flex items-center gap-3 text-retro-muted hover:text-retro-accent transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                            </svg>
+                            <span class="text-xs tracking-wider">GITHUB</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form Panel -->
+            <div class="md:col-span-2">
+                <div class="glass-panel p-8 rounded-2xl hover:border-retro-accent/50 transition-all duration-300 group">
+                    <form hx-post="/contact" hx-swap="outerHTML" class="text-left space-y-6">
+                        <div class="group relative">
+                            <input type="text" name="name" id="name" required placeholder=" "
+                                class="peer w-full bg-transparent border-b border-white/20 py-3 text-white focus:border-retro-accent focus:outline-none transition-colors">
+                            <label for="name"
+                                class="absolute left-0 top-3 text-retro-muted transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-retro-accent peer-not-placeholder-shown:-top-4 peer-not-placeholder-shown:text-xs">IDENTIFICAÇÃO</label>
+                        </div>
+                        <div class="group relative">
+                            <input type="email" name="email" id="email" required placeholder=" "
+                                class="peer w-full bg-transparent border-b border-white/20 py-3 text-white focus:border-retro-accent focus:outline-none transition-colors">
+                            <label for="email"
+                                class="absolute left-0 top-3 text-retro-muted transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-retro-accent peer-not-placeholder-shown:-top-4 peer-not-placeholder-shown:text-xs">FREQUÊNCIA
+                                (EMAIL)</label>
+                        </div>
+                        <div class="group relative">
+                            <textarea name="message" id="message" rows="3" required placeholder=" "
+                                class="peer w-full bg-transparent border-b border-white/20 py-3 text-white focus:border-retro-accent focus:outline-none transition-colors resize-none"></textarea>
+                            <label for="message"
+                                class="absolute left-0 top-3 text-retro-muted transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-retro-accent peer-not-placeholder-shown:-top-4 peer-not-placeholder-shown:text-xs">TRANSMISSÃO</label>
+                        </div>
+
+                        <div class="pt-2 text-right">
+                            <button type="submit"
+                                class="bg-white/10 border border-white/20 text-white px-8 py-3 rounded hover:bg-retro-accent hover:border-retro-accent hover:text-retro-bg transition-all flex items-center gap-2 ml-auto font-mono text-sm tracking-widest uppercase">
+                                Enviar Dados
+                                <img class="htmx-indicator h-4 w-4"
+                                    src="https://raw.githubusercontent.com/n3r4zzurr0/svg-spinners/main/svg-css/90-ring-with-bg.svg"
+                                    alt="...">
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 6. README MODAL (Oculto) -->
+<div id="readme-modal"
+    class="fixed inset-0 bg-black/90 z-[70] hidden backdrop-blur-md overflow-hidden flex flex-col items-center justify-center p-4">
+    <div
+        class="glass-panel w-full max-w-4xl h-[85vh] rounded-xl flex flex-col border border-retro-accent/30 shadow-[0_0_50px_rgba(139,92,246,0.15)] relative animate-fadeIn">
+        <div class="flex justify-between items-center p-4 border-b border-white/10 bg-white/5">
+            <div class="flex items-center gap-2">
+                <span class="text-2xl">📄</span>
+                <h3 id="modal-title"
+                    class="font-mono text-sm md:text-lg text-retro-accent truncate max-w-[200px] md:max-w-md">README.md
+                </h3>
+            </div>
+            <div class="flex gap-3 items-center">
+                <a id="github-link" href="#" target="_blank"
+                    class="hidden md:flex text-[10px] text-retro-muted hover:text-white items-center gap-1 uppercase tracking-wider border border-white/10 px-2 py-1 rounded hover:border-retro-accent transition-colors">Ver
+                    no GitHub ↗</a>
+                <button onclick="closeReadme()"
+                    class="w-8 h-8 flex items-center justify-center rounded-full bg-white/10 hover:bg-red-500/20 text-retro-muted hover:text-red-400 transition-colors text-lg leading-none">✕</button>
+            </div>
+        </div>
+        <div id="readme-content"
+            class="flex-grow overflow-y-auto p-6 md:p-8 custom-scrollbar markdown-body bg-black/20"></div>
+    </div>
+</div>
+
+<!-- Lógica JavaScript do Modal (Atualizada e Robusta) -->
+<script>
+    async function openReadme(username, repo) {
+        // 1. Tratamento básico do nome do repositório (remove espaços se houver)
+        // Se no seu banco o nome é "Meu Projeto", transforma em "Meu-Projeto" ou similar se necessário.
+        // O ideal é que project.name seja EXATAMENTE o slug do github.
+        const cleanRepo = repo.trim();
+
+        const modal = document.getElementById('readme-modal');
+        const contentDiv = document.getElementById('readme-content');
+        const title = document.getElementById('modal-title');
+        const link = document.getElementById('github-link');
+
+        console.log(`[DevFolio] Iniciando busca para: ${username}/${cleanRepo}`);
+
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+
+        title.innerText = `${username}/${cleanRepo}`;
+        link.href = `https://github.com/${username}/${cleanRepo}`;
+
+        // Loader Animado
+        contentDiv.innerHTML = `
+            <div class="flex flex-col items-center justify-center h-full text-retro-muted gap-4">
+                <div class="w-12 h-12 border-2 border-retro-accent border-t-transparent rounded-full animate-spin"></div>
+                <p class="font-mono text-xs tracking-widest animate-pulse">CONTACTANDO GITHUB...</p>
+            </div>
+        `;
+
+        try {
+            let markdownText = null;
+
+            // TENTATIVA 1: API Oficial (Lida com redirects e branches automaticamente)
+            const apiUrl = `https://api.github.com/repos/${username}/${cleanRepo}/readme`;
+            console.log(`[DevFolio] Tentando API: ${apiUrl}`);
+
+            let response = await fetch(apiUrl, {
+                headers: { 'Accept': 'application/vnd.github.raw' }
+            });
+
+            // Se der erro de limite (403) ou não achar (404), tentamos o Fallback
+            if (!response.ok) {
+                console.warn(`[DevFolio] Falha na API (${response.status}). Tentando método direto (Raw)...`);
+
+                // TENTATIVA 2: Acesso Direto (Raw) - Tenta 'main' e depois 'master'
+                const branches = ['main', 'master'];
+                for (let branch of branches) {
+                    const rawUrl = `https://raw.githubusercontent.com/${username}/${cleanRepo}/${branch}/README.md`;
+                    console.log(`[DevFolio] Tentando Raw: ${rawUrl}`);
+
+                    const rawResponse = await fetch(rawUrl);
+                    if (rawResponse.ok) {
+                        markdownText = await rawResponse.text();
+                        console.log(`[DevFolio] Sucesso via Raw (${branch})`);
+                        break;
+                    }
+                }
+
+                // Se ainda for null, lançamos o erro original da API
+                if (!markdownText) {
+                    if (response.status === 403) throw new Error("Limite de requisições do GitHub excedido (60/hora). Tente mais tarde.");
+                    if (response.status === 404) throw new Error(`Repositório "${cleanRepo}" ou README não encontrado.`);
+                    throw new Error(`Erro GitHub: ${response.status} ${response.statusText}`);
+                }
+            } else {
+                markdownText = await response.text();
+                console.log("[DevFolio] Sucesso via API.");
+            }
+
+            // Renderiza o Markdown
+            const cleanHtml = DOMPurify.sanitize(marked.parse(markdownText));
+            contentDiv.innerHTML = cleanHtml;
+
+            // Aplica Syntax Highlighting
+            contentDiv.querySelectorAll('pre code').forEach((el) => {
+                hljs.highlightElement(el);
+            });
+
+            // Ajusta imagens quebradas (caminhos relativos no readme)
+            contentDiv.querySelectorAll('img').forEach(img => {
+                const src = img.getAttribute('src');
+                if (src && !src.startsWith('http')) {
+                    // Reconstrói URL para imagens relativas
+                    img.src = `https://raw.githubusercontent.com/${username}/${cleanRepo}/main/${src}`;
+                }
+            });
+
+        } catch (error) {
+            console.error("[DevFolio] Erro Final:", error);
+            contentDiv.innerHTML = `
+                <div class="flex flex-col items-center justify-center h-full text-red-400 text-center p-6">
+                    <div class="text-4xl mb-4 opacity-50">¯\\_(ツ)_/¯</div>
+                    <h3 class="font-bold mb-2 text-white">FALHA NA CONEXÃO</h3>
+                    <p class="font-mono text-sm text-retro-muted mb-6 max-w-md">${error.message}</p>
+                    
+                    <div class="text-xs text-left bg-black/30 p-4 rounded border border-white/10 font-mono mb-6">
+                        <p class="text-retro-accent">DEBUG INFO:</p>
+                        <p>User: ${username}</p>
+                        <p>Repo: ${cleanRepo}</p>
+                        <p>Dica: Verifique se o nome do projeto no site é igual ao da URL do GitHub.</p>
+                    </div>
+
+                    <button onclick="closeReadme()" class="px-6 py-2 border border-white/20 hover:bg-white/10 hover:text-white rounded transition-colors text-xs tracking-widest">FECHAR</button>
+                </div>
+            `;
+        }
+    }
+
+    function closeReadme() {
+        const modal = document.getElementById('readme-modal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = 'auto';
+    }
+
+    // Event Listeners
+    document.getElementById('readme-modal').addEventListener('click', (e) => {
+        if (e.target.id === 'readme-modal') closeReadme();
+    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeReadme(); });
+</script>
+
+{% endblock %}

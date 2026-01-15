@@ -1,0 +1,166 @@
+<div class="w-full mb-12">
+    <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+        <span class="text-blue-500">#</span> Steam Activity
+    </h3>
+
+    <div
+        class="glass-panel p-6 rounded-xl border border-white/10 hover:border-blue-500/50 transition-all group relative overflow-hidden">
+        <div class="absolute top-0 right-0 p-4 opacity-50 group-hover:opacity-100 transition-opacity">
+            <span class="text-xs font-mono border border-white/10 px-2 py-1 rounded text-retro-muted">STEAM.LOG</span>
+        </div>
+
+        {% if steam.online %}
+        <div class="flex flex-col lg:flex-row gap-8">
+
+            <!-- 1. Profile & Status -->
+            <div class="flex flex-col items-center lg:items-start gap-4 lg:w-1/4 min-w-[200px]">
+                <div class="relative group/avatar">
+                    <div
+                        class="w-32 h-32 rounded-xl overflow-hidden ring-2 ring-blue-500/50 group-hover/avatar:ring-blue-500 transition-all shadow-lg shadow-blue-500/20">
+                        <img src="{{ steam.avatar_url }}" alt="{{ steam.username }}" class="w-full h-full object-cover">
+                    </div>
+                    <div
+                        class="absolute -bottom-3 -right-3 bg-black/90 text-white text-sm font-bold px-3 py-1 rounded border border-blue-500 shadow-md">
+                        LVL {{ steam.level }}
+                    </div>
+                </div>
+
+                <div class="text-center lg:text-left">
+                    <h3 class="text-white font-bold text-2xl mb-1">{{ steam.username }}</h3>
+                    <div class="flex items-center justify-center lg:justify-start gap-2 mb-3">
+                        {% if steam.status == 1 %}
+                        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                        <span class="text-green-400 text-xs font-mono">ONLINE</span>
+                        {% elif steam.status == 0 %}
+                        <span class="w-2 h-2 rounded-full bg-gray-500"></span>
+                        <span class="text-gray-400 text-xs font-mono">OFFLINE</span>
+                        {% else %}
+                        <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+                        <span class="text-blue-300 text-xs font-mono">IN-GAME</span>
+                        {% endif %}
+                    </div>
+                    <a href="{{ steam.profile_url }}" target="_blank"
+                        class="inline-flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 rounded text-xs text-blue-400 hover:text-blue-300 font-mono transition-colors border border-white/5 hover:border-blue-500/30">
+                        <span>STEAM PROFILE</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 2. Recently Played & Achievements -->
+            <div class="flex-1 space-y-4">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-retro-muted text-xs font-mono tracking-widest">RECENTLY PLAYED</span>
+                </div>
+
+                {% if steam.recent_games %}
+                <div class="space-y-4">
+                    {% for game in steam.recent_games %}
+                    <div
+                        class="bg-white/5 p-4 rounded-lg hover:bg-white/10 transition-colors border border-white/5 hover:border-white/10 group/game flex gap-4 items-center">
+                        <img src="{{ game.icon_url }}" alt="{{ game.name }}" class="w-12 h-12 rounded shadow-sm">
+
+                        <div class="flex-1 min-w-0">
+                            <div class="flex justify-between items-center mb-1">
+                                <h4 class="text-white font-bold truncate pr-4 text-sm md:text-base">{{ game.name }}</h4>
+                                <span class="text-retro-muted text-xs font-mono whitespace-nowrap">{{
+                                    game.playtime_2weeks }}h / 2w</span>
+                            </div>
+
+                            <!-- Achievement Progress -->
+                            {% if game.achievements.total > 0 %}
+                            <div class="w-full bg-black/30 h-2 rounded-full overflow-hidden relative">
+                                <div class="bg-gradient-to-r from-blue-600 to-blue-400 h-full rounded-full"
+                                    style="width: {{ game.achievements.percentage }}%"></div>
+                            </div>
+                            <div class="flex justify-between mt-1">
+                                <span class="text-[10px] text-retro-muted font-mono">ACHIEVEMENTS</span>
+                                <span class="text-[10px] text-blue-300 font-mono">{{ game.achievements.achieved }}/{{
+                                    game.achievements.total }} ({{ game.achievements.percentage }}%)</span>
+                            </div>
+                            {% else %}
+                            <div class="text-[10px] text-retro-muted font-mono mt-1">NO ACHIEVEMENTS</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="text-retro-muted text-sm font-mono italic">No games played in the last 2 weeks.</div>
+                {% endif %}
+            </div>
+
+            <!-- 3. Screenshot Showcase (Replicating the Steam UI) -->
+            {% if steam.screenshots %}
+            <div class="lg:w-1/3 min-w-[300px] flex flex-col">
+                <div
+                    class="flex items-center justify-between mb-2 bg-[#1b2838] p-2 rounded-t-lg border-t border-l border-r border-white/10">
+                    <span class="text-white text-sm font-normal tracking-wide">Screenshot Showcase</span>
+                    <div class="flex items-center gap-1 text-retro-muted text-xs cursor-not-allowed opacity-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                            <path
+                                d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="flex-1 bg-black/20 border border-white/10 rounded-b-lg p-1 flex gap-1 h-[200px] lg:h-auto">
+                    <!-- Main Large Screenshot -->
+                    {% if steam.screenshots[0] %}
+                    <a href="{{ steam.screenshots[0].link }}" target="_blank"
+                        class="relative w-3/4 h-full group/main overflow-hidden border border-white/5">
+                        <img src="{{ steam.screenshots[0].image_url }}" alt="{{ steam.screenshots[0].title }}"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover/main:scale-105">
+                        <div
+                            class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-3 opacity-0 group-hover/main:opacity-100 transition-opacity duration-300">
+                            <p class="text-white text-xs font-mono truncate">{{ steam.screenshots[0].title }}</p>
+                        </div>
+                    </a>
+                    {% endif %}
+
+                    <!-- Side Column -->
+                    <div class="w-1/4 flex flex-col gap-1 h-full">
+                        <!-- Small Shot 1 -->
+                        {% if steam.screenshots[1] %}
+                        <a href="{{ steam.screenshots[1].link }}" target="_blank"
+                            class="relative h-1/3 w-full border border-white/5 overflow-hidden group/small">
+                            <img src="{{ steam.screenshots[1].image_url }}" alt="Shot 2"
+                                class="w-full h-full object-cover opacity-80 group-hover/small:opacity-100 transition-opacity">
+                        </a>
+                        {% endif %}
+
+                        <!-- Small Shot 2 -->
+                        {% if steam.screenshots[2] %}
+                        <a href="{{ steam.screenshots[2].link }}" target="_blank"
+                            class="relative h-1/3 w-full border border-white/5 overflow-hidden group/small">
+                            <img src="{{ steam.screenshots[2].image_url }}" alt="Shot 3"
+                                class="w-full h-full object-cover opacity-80 group-hover/small:opacity-100 transition-opacity">
+                        </a>
+                        {% endif %}
+
+                        <!-- Counter / More -->
+                        <a href="{{ steam.profile_url }}screenshots/" target="_blank"
+                            class="h-1/3 w-full bg-[#222] border border-white/5 flex flex-col items-center justify-center hover:bg-[#333] transition-colors group/more text-decoration-none">
+                            <span
+                                class="text-white text-xs font-bold group-hover/more:text-blue-400 transition-colors">+
+                                48</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="mt-1 text-xs text-retro-muted font-mono">{{ steam.screenshots[0].title if
+                    steam.screenshots[0] else "Night City" }}</div>
+            </div>
+            {% endif %}
+
+        </div>
+        {% else %}
+        <div class="p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-sm">
+            {{ steam.error or "Unable to load Steam profile." }}
+        </div>
+        {% endif %}
+    </div>
+</div>
