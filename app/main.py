@@ -11,6 +11,7 @@ from app.core.config import get_settings
 from app.core.i18n import get_translations
 # CORREÇÃO AQUI: Removido o chat duplicado
 from app.routers import general, projects, blog, admin, chat 
+from app.services.steam_service import close_client as close_steam_client
 
 # Rate Limiter
 limiter = Limiter(key_func=get_remote_address)
@@ -19,6 +20,7 @@ limiter = Limiter(key_func=get_remote_address)
 async def lifespan(app: FastAPI):
     await init_db()
     yield
+    await close_steam_client()
 
 settings = get_settings()
 
